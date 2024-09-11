@@ -23,11 +23,13 @@ class modelStatus {
     public function getById($idStatus) {
         try {
 
+            $id = filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT);
+
             $conn = connectionDB::connect();
-            $conn->prepare("SELECT * FROM tblStatus WHERE id_status = :id_status");
-            $conn->bindParam(':id_status', filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT));
-            $conn->execute();
-            $result = $conn->fetch(PDO::FETCH_ASSOC);
+            $search = $conn->prepare("SELECT * FROM tblStatus WHERE id_status = :id_status");
+            $search->bindParam(':id_status', $id);
+            $search->execute();
+            $result = $search->fetch(PDO::FETCH_ASSOC);
 
             return $result;
 
@@ -44,7 +46,7 @@ class modelStatus {
 
             $conn = connectionDB::connect();
             $save = $conn->prepare("INSERT INTO tblStatus (status, created_at) VALUES (:status, NOW())");
-            $save->bindParam(":status",$status_name);
+            $save->bindParam(":status", $status_name);
             $save->execute();
 
             return true;
