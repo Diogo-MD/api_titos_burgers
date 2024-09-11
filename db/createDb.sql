@@ -1,3 +1,3 @@
-CREATE DATABASE titos_burgers;
+CREATE DATABASE api_titosburger;
 
 USE titos_burgers;

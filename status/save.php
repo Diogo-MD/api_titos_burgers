@@ -6,7 +6,7 @@ require_once("../model/modelStatus.php");
 // Validar o Método da requisição
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $data = json_decode(file_get_contents("php://input"));
+    $data = json_decode(file_get_contents("php://input"), true);
 
     if (array_key_exists("status", $data)) {
         $controllerStatus = new controllerStatus();

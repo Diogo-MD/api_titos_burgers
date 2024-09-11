@@ -40,10 +40,12 @@ class modelStatus {
     public function save($data) {
         try {
 
+            $status_name = htmlspecialchars($data["status"], ENT_QUOTES);
+
             $conn = connectionDB::connect();
-            $conn->prepare("INSERT INTO tblStatus (status, created_at) VALUES (:status, NOW())");
-            $conn->bindParam(":status", htmlspecialchars($data->status, ENT_NOQUOTES));
-            $conn->execute();
+            $save = $conn->prepare("INSERT INTO tblStatus (status, created_at) VALUES (:status, NOW())");
+            $save->bindParam(":status",$status_name);
+            $save->execute();
 
             return true;
 
