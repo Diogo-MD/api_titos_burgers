@@ -80,10 +80,13 @@ class modelStatus {
     //Deletar um status por ID
     public function delete($idStatus) {
         try {
+
+            $id = filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT);
+
             $conn = connectionDB::connect();
-            $conn->prepare("DELETE FROM tblStatus WHERE id_status = :id_status");
-            $conn->bindParam(":id_status", filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT));
-            $conn->execute();
+            $delete = $conn->prepare("DELETE FROM tblStatus WHERE id_status = :id_status");
+            $delete->bindParam(":id_status", $id);
+            $delete->execute();
 
             return true;
 
