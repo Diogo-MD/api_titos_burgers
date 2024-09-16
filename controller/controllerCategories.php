@@ -16,7 +16,7 @@ class controllerCategories {
     public function listAll() {
         try {
             $controllerCategories = new controllerCategories();
-            return $controllerCategories>listAll();
+            return $controllerCategories->listAll();
         } catch (PDOException $e) {
             return false;
         }
