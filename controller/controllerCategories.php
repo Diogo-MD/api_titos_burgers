@@ -5,47 +5,61 @@ class controllerCategories {
     //Criação de uma nova categoria
     public function save($data) {
         try {
+
             $modelCategories = new modelCategories();
             return $modelCategories->save($data);
 
-        } catch (PDOException $_ENV) {
+        } catch(PDOException $e) {
             return false;
         }
     }
 
+    //Listar todas as categorias
     public function listAll() {
         try {
-            $controllerCategories = new controllerCategories();
-            return $controllerCategories->listAll();
+
+            $modelCategories = new modelCategories();
+            return $modelCategories->listAll();
+
         } catch (PDOException $e) {
             return false;
         }
     }
 
+    //Listar categoria por ID
     public function searchById($id) {
         try {
-            $controllerCategories = new controllerCategories();
-            return $controllerCategories->searchById($id);
+
+            $modelCategories = new modelCategories();
+            return $modelCategories->searchById($id);
+
         } catch (PDOException $e) {
             return false;
         }
     }
 
+    //Atualizar categoria por ID
     public function update($id, $data) {
         try {
-            $controllerCategories = new controllerCategories();
-            return $controllerCategories->update($id, $data);
-        } catch (PDOException $e) {
+
+            $modelCategories = new modelCategories();
+            return $modelCategories->update($id, $data);
+
+        } catch(PDOException $e) {
             return false;
-        }       
+        }
     }
 
+    //Deletar uma categoria por ID
     public function delete($id) {
         try {
-            $controllerCategories = new controllerCategories();
-            return $controllerCategories->delete($id);
+
+            $modelCategories = new modelCategories();
+            return $modelCategories->delete($id);
+
         } catch (PDOException $e) {
             return false;
         }
     }
+
 }
