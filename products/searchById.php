@@ -5,14 +5,16 @@ require_once("../model/modelProducts.php");
 
 if($_SERVER["REQUEST_METHOD"] == "GET") {
 
-    $controllerProducts = new controllerProducts();
-    $list = $controllerProducts->listAll();
+    $id = $_GET["id"];
 
-    if($list) {
-        $msg = array("products" => $list);
-        echo json_encode($list);
+    $controllerProducts = new controllerProducts();
+    $search = $controllerProducts->searchById($id);
+
+    if($search) {
+        $msg = array("product" => $search);
+        echo json_encode($msg);
     } else {
-        $msg = array("products" => []);
+        $msg = array("product" => [], "msg" => "Product not found.");
         echo json_encode($msg);
     }
 

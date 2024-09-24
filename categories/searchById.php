@@ -3,18 +3,18 @@
 require_once("../controller/controllerCategories.php");
 require_once("../model/modelCategories.php");
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if($_SERVER["REQUEST_METHOD"] == "GET") {
 
-    $data = json_decode(file_get_contents("php://input"), true);
+    $id = $_GET["id"];
 
     $controllerCategories = new controllerCategories();
-    $save = $controllerCategories->save($data);
+    $search = $controllerCategories->searchById($id);
 
-    if($save) {
-        $msg = array("msg" => "Category created successfully.");
+    if($search) {
+        $msg = array("category" => $search);
         echo json_encode($msg);
     } else {
-        $msg = array("msg" => "Error, category does not created");
+        $msg = array("category" => [], "msg" => "Category not found.");
         echo json_encode($msg);
     }
 

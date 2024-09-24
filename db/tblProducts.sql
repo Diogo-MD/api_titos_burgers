@@ -11,6 +11,7 @@ updated_at
 */
 CREATE TABLE tblProducts(
     id_product INT PRIMARY KEY AUTO_INCREMENT,
+    image VARCHAR(50),
     product_name VARCHAR(10) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     description VARCHAR(50) NOT NULL,

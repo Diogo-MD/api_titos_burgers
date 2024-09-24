@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET") {
     $search = $controllerStatus->getById($id);
 
     if($search) {
-        $msg  = array("status" => $search);
+        $msg = array("status" => $search);
         echo json_encode($msg);
     } else {
         $msg = array("status" => [], "msg" => "Not exists result for ID.");

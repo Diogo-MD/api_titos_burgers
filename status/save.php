@@ -3,17 +3,17 @@
 require_once("../controller/controllerStatus.php");
 require_once("../model/modelStatus.php");
 
-// Validar o Método da requisição
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+//Validar o método da requisição
+if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $data = json_decode(file_get_contents("php://input"), true);
 
-    if (array_key_exists("status", $data)) {
+    if(array_key_exists("status", $data)) {
         $controllerStatus = new controllerStatus();
         $save = $controllerStatus->save($data);
 
-        if ($save) {
-            $msg = array("msg" => "Create status with success.");
+        if($save) {
+            $msg = array("msg" => "Created status with success.");
             echo json_encode($msg);
         } else {
             $msg = array("msg" => "Error, status not created.");
@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $msg = array("error" => "Parameter 'status' not exists!");
         echo json_encode($msg);
     }
+    
+
 } else {
     header("HTTP/1.1 405 Method Not Allowed");
 }

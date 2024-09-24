@@ -42,7 +42,7 @@ class modelStatus {
     public function save($data) {
         try {
 
-            $status_name = htmlspecialchars($data["status"], ENT_QUOTES);
+            $status_name = htmlspecialchars($data["status"], ENT_NOQUOTES);
 
             $conn = connectionDB::connect();
             $save = $conn->prepare("INSERT INTO tblStatus (status, created_at) VALUES (:status, NOW())");
@@ -60,7 +60,7 @@ class modelStatus {
     public function update($idStatus, $data) {
         try {
 
-            $status_name = htmlspecialchars($data["status"],ENT_NOQUOTES);
+            $status_name = htmlspecialchars($data["status"], ENT_NOQUOTES);
             $id = filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT);
 
             $conn = connectionDB::connect();

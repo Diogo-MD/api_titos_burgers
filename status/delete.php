@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once("../controller/controllerStatus.php");
 require_once("../model/modelStatus.php");
@@ -14,7 +14,7 @@ if($_SERVER["REQUEST_METHOD"] == "DELETE") {
     $delete = $controllerStatus->delete($id);
 
     if($delete) {
-        $msg = array("msg" => "Status deleted successfuly.");
+        $msg = array("msg" => "Status deleted successfully.");
         echo json_encode($msg);
     } else {
         $msg = array("msg" => "Error, status does not deleted.");

@@ -1,31 +1,33 @@
 <?php
 
-class controllerProducts
-{
-    public function save($data)
-    {
+class controllerProducts {
+
+    //Criar novo produto
+    public function save($data) {
         try {
 
             $modelProducts = new modelProducts();
             return $modelProducts->save($data);
-        } catch (PDOException $e) {
+
+        } catch(PDOException $e) {
             return false;
         }
     }
 
-    public function listAll()
-    {
+    //Litar todos os produtos
+    public function listAll(){
         try {
 
             $modelProducts = new modelProducts();
             return $modelProducts->listAll();
-        } catch (PDOException $e) {
+
+        } catch(PDOException $e) {
             return false;
         }
     }
 
-    public function searchById($id)
-    {
+    //Listar um produto por ID
+    public function searchById($id) {
         try {
 
             $modelProducts = new modelProducts();
@@ -36,32 +38,38 @@ class controllerProducts
         }
     }
 
-    public function listByCategory($id_category) {
+    //Listar os produtos de uma categoria
+    public function listByCategory($id) {
         try {
-            
+
             $modelProducts = new modelProducts();
-            return $modelProducts->listByCategory($id_category);
+            return $modelProducts->listByCategory($id);
+
         } catch (PDOException $e) {
             return false;
         }
     }
 
+    //Atualizar um produto por ID
     public function update($id, $data) {
         try {
 
             $modelProducts = new modelProducts();
             return $modelProducts->update($id, $data);
-        } catch(PDOException $e) {
+
+        } catch (PDOException $e) {
             return false;
         }
     }
 
+    //Deletar um produto por ID
     public function delete($id) {
         try {
 
             $modelProducts = new modelProducts();
             return $modelProducts->delete($id);
-        } catch(PDOException $e) {
+
+        } catch (PDOException $e) {
             return false;
         }
     }

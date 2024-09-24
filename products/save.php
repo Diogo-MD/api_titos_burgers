@@ -4,7 +4,7 @@ require_once("../controller/controllerProducts.php");
 require_once("../model/modelProducts.php");
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
-    
+
     $data = json_decode(file_get_contents("php://input"), true);
 
     $controllerProducts = new controllerProducts();
@@ -19,5 +19,5 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 } else {
-    header("HTTP/1.1 405 Method Not Allowed.");
+    header("HTTP/1.1 405 Method Not Allowed");
 }
