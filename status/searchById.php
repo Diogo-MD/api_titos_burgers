@@ -1,7 +1,7 @@
 <?php
 
-require_once("../controller/controllerStatus.php");
-require_once("../model/modelStatus.php");
+require_once ("../controller/controllerStatus.php");
+require_once ("../model/modelStatus.php");
 
 if($_SERVER["REQUEST_METHOD"] == "GET") {
 

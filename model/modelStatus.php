@@ -9,7 +9,7 @@ class modelStatus {
         try {
 
             $conn = connectionDB::connect();
-            $list = $conn->query("SELECT * FROM tblStatus");
+            $list = $conn->query("SELECT * FROM tbl_status");
             $result = $list->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
@@ -24,12 +24,11 @@ class modelStatus {
         try {
 
             $id = filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT);
-
             $conn = connectionDB::connect();
-            $search = $conn->prepare("SELECT * FROM tblStatus WHERE id_status = :id_status");
-            $search->bindParam(':id_status', $id);
-            $search->execute();
-            $result = $search->fetch(PDO::FETCH_ASSOC);
+            $stmt = $conn->prepare("SELECT * FROM tbl_status WHERE id_status = :id_status");
+            $stmt->bindParam(':id_status', $id);
+            $stmt->execute();
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $result;
 
@@ -43,11 +42,10 @@ class modelStatus {
         try {
 
             $status_name = htmlspecialchars($data["status"], ENT_NOQUOTES);
-
             $conn = connectionDB::connect();
-            $save = $conn->prepare("INSERT INTO tblStatus (status, created_at) VALUES (:status, NOW())");
-            $save->bindParam(":status", $status_name);
-            $save->execute();
+            $stmt = $conn->prepare("INSERT INTO tbl_status (status, created_at) VALUES (:status, NOW())");
+            $stmt->bindParam(":status", $status_name);
+            $stmt->execute();
 
             return true;
 
@@ -60,15 +58,15 @@ class modelStatus {
     public function update($idStatus, $data) {
         try {
 
-            $status_name = htmlspecialchars($data["status"], ENT_NOQUOTES);
             $id = filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT);
+            $status = htmlspecialchars($data["status"], ENT_NOQUOTES);
 
             $conn = connectionDB::connect();
-            $update = $conn->prepare("UPDATE tblStatus SET status = :status, updated_at = NOW()
+            $stmt = $conn->prepare("UPDATE tbl_status SET status = :status, updated_at = NOW()
                              WHERE id_status = :id_status ");
-            $update->bindParam(":status", $status_name);
-            $update->bindParam(":id_status", $id);
-            $update->execute();
+            $stmt->bindParam(":status", $status);
+            $stmt->bindParam(":id_status", $id);
+            $stmt->execute();
 
             return true;
 
@@ -81,12 +79,10 @@ class modelStatus {
     public function delete($idStatus) {
         try {
 
-            $id = filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT);
-
             $conn = connectionDB::connect();
-            $delete = $conn->prepare("DELETE FROM tblStatus WHERE id_status = :id_status");
-            $delete->bindParam(":id_status", $id);
-            $delete->execute();
+            $stmt = $conn->prepare("DELETE FROM tblStatus WHERE id_status = :id_status");
+            $stmt->bindParam(":id_status", filter_var($idStatus, FILTER_SANITIZE_NUMBER_INT));
+            $stmt->execute();
 
             return true;
 

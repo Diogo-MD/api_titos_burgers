@@ -12,7 +12,7 @@ class modelCategories {
             $image = htmlspecialchars($data["image"], ENT_NOQUOTES);
 
             $conn = connectionDB::connect();
-            $save = $conn->prepare("INSERT INTO tblCategories (category_name, image, id_status, created_at) VALUES (:category_name, :image, 1, NOW())");
+            $save = $conn->prepare("INSERT INTO tbl_categories (category_name, image, id_status, created_at) VALUES (:category_name, :image, 1, NOW())");
             $save->bindParam(":category_name", $category_name);
             $save->bindParam(":image", $image);
             $save->execute();
@@ -30,7 +30,7 @@ class modelCategories {
 
             $conn = connectionDB::connect();
 
-            $list = $conn->query("SELECT * FROM tblCategories");
+            $list = $conn->query("SELECT * FROM tbl_categories");
             $result = $list->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
@@ -48,7 +48,7 @@ class modelCategories {
             $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
             $conn = connectionDB::connect();
-            $search = $conn->prepare("SELECT * FROM tblCategories WHERE id_category = :id");
+            $search = $conn->prepare("SELECT * FROM tbl_categories WHERE id_category = :id");
             $search->bindParam(":id", $id);
             $search->execute();
             $result = $search->fetch(PDO::FETCH_ASSOC);
@@ -69,7 +69,7 @@ class modelCategories {
             $id_status = filter_var($data["id_status"], FILTER_SANITIZE_NUMBER_INT);
 
             $conn = connectionDB::connect();
-            $update = $conn->prepare("UPDATE tblCategories SET category_name = :category_name, image = :image, id_status = :id_status, updated_at = NOW() WHERE id_category = :id_category");
+            $update = $conn->prepare("UPDATE tbl_categories SET category_name = :category_name, image = :image, id_status = :id_status, updated_at = NOW() WHERE id_category = :id_category");
             $update->bindParam(":category_name", $category_name);
             $update->bindParam(":image", $image);
             $update->bindParam(":id_status", $id_status);
@@ -79,6 +79,7 @@ class modelCategories {
             return true;
 
         } catch(PDOException $e) {
+            echo $e;
             return false;
         }
     }
@@ -90,7 +91,7 @@ class modelCategories {
             $id = filter_var($id, FILTER_SANITIZE_NUMBER_INT);
 
             $conn = connectionDB::connect();
-            $delete = $conn->prepare("DELETE FROM tblCategories WHERE id_category = :id");
+            $delete = $conn->prepare("DELETE FROM tbl_categories WHERE id_category = :id");
             $delete->bindParam(":id", $id);
             $delete->execute();
 

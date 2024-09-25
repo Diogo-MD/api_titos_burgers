@@ -3,10 +3,9 @@
 require_once("../controller/controllerCategories.php");
 require_once("../model/modelCategories.php");
 
-if($_SERVER["REQUEST_METHOD"] == "PUT") {
+if($_SERVER['REQUEST_METHOD'] == "PUT") {
 
-    //Capturar o ID da categoria a ser atualizada
-    $query = $_SERVER["QUERY_STRING"];
+    $query = $_SERVER['QUERY_STRING'];
     parse_str($query, $params);
     $id = $params["id"];
 
@@ -16,11 +15,11 @@ if($_SERVER["REQUEST_METHOD"] == "PUT") {
     $update = $controllerCategories->update($id, $data);
 
     if($update) {
-        $msg = array("msg" => "Category was updated successfully.");
+        $msg = array("msg" => 'category was updated  successfully.');
         echo json_encode($msg);
     } else {
         $msg = array("msg" => "Error, category was not updated.");
-        echo json_encode($msg);
+        echo json_encode($msg); 
     }
 
 } else {

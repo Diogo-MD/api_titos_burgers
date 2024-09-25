@@ -9,17 +9,16 @@ if($_SERVER["REQUEST_METHOD"] == "DELETE") {
     parse_str($query, $params);
     $id = $params["id"];
 
-    $controllerCategories = new controllerCategories();
-    $delete = $controllerCategories->delete($id);
+    $controllerCateries = new controllerCategories();
+    $delete = $controllerCateries->delete($id);
 
-    if($delete) {
+    if($id) {
         $msg = array("msg" => "Category was deleted successfully.");
         echo json_encode($msg);
     } else {
-        $msg = array("msg" => "Error, category was not deleted.");
+        $msg = array("msg" => "Error, Category was not deleted."); 
         echo json_encode($msg);
     }
-
 } else {
-    header("HTTP/1.1 405 Method Not Allowed");
+    header("HTTP/1.1 Method Not Allowed");
 }

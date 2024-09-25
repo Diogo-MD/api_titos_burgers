@@ -3,19 +3,18 @@
 require_once("../controller/controllerProducts.php");
 require_once("../model/modelProducts.php");
 
-if($_SERVER["REQUEST_METHOD"] == "GET") {
+if($_SERVER['REQUEST_METHOD'] == "GET") {
 
     $controllerProducts = new controllerProducts();
-    $list = $controllerProducts->listAll();
+    $result = $controllerProducts->listAll();
 
-    if($list) {
-        $msg = array("products" => $list);
-        echo json_encode($list);
+    if($result) {
+        $msg = array("Products" => $result);
+        echo json_encode($msg);
     } else {
-        $msg = array("products" => []);
+        $msg = array("Products" => "[]");
         echo json_encode($msg);
     }
-
 } else {
-    header("HTTP/1.1 405 Method Not Allowed");
+    header("HTTP/1.1 405 Method Not allowed");
 }

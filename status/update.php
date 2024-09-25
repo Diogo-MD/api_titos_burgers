@@ -1,16 +1,13 @@
 <?php
-
-//echo $_SERVER["QUERY_STRING"];
-
 require_once("../controller/controllerStatus.php");
 require_once("../model/modelStatus.php");
 
 if($_SERVER["REQUEST_METHOD"] == "PUT") {
 
-    $query = $_SERVER["QUERY_STRING"];
+    $query = $_SERVER['QUERY_STRING'];
     parse_str($query, $params);
 
-    $id = $params["id"];
+    $id = $params['id'];
 
     $data = json_decode(file_get_contents("php://input"), true);
 
@@ -21,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "PUT") {
         $msg = array("msg" => "Status updated successfully");
         echo json_encode($msg);
     } else {
-        $msg = array("msg" => "Error, status was not updated.");
+        $msg = array("msg" => "Error status was not updated.");
         echo json_encode($msg);
     }
 
