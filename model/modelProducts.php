@@ -16,7 +16,7 @@ class modelProducts
 
             $sql = "INSERT INTO tbl_product (product_name, image, price, description, id_category, id_status, created_at) VALUES
             (:product_name, :image, :price, :description, :id_category, :id_status, now())";
-            $conn = ConnectionDB::connect();
+            $conn = connectionDB::connect();
             $stmt = $conn->prepare($sql);
             $stmt->bindParam(':product_name', $name);
             $stmt->bindParam(':image', $image);
@@ -29,6 +29,7 @@ class modelProducts
 
             return true;
         } catch (PDOException $e) {
+            echo $e;
             return false;
         }
     }
@@ -41,8 +42,8 @@ class modelProducts
             $result = $list->fetchAll(PDO::FETCH_ASSOC);
 
             return $result;
-
         } catch (PDOException $e) {
+            echo $e;
             return false;
         }
     }
